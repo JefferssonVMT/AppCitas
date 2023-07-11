@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CitasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CitasModelStoreContainer">
+    <EntitySet Name="Clientes" EntityType="CitasModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Citas" EntityType="CitasModel.Store.Citas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TipoServicios" EntityType="CitasModel.Store.TipoServicios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Servicios" EntityType="CitasModel.Store.Servicios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EstadoCitas" EntityType="CitasModel.Store.EstadoCitas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EstadoClientes" EntityType="CitasModel.Store.EstadoClientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fechas" EntityType="CitasModel.Store.Fechas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EstadoHorarios" EntityType="CitasModel.Store.EstadoHorarios" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Horas" EntityType="CitasModel.Store.Horas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DetalleFechaBloques" EntityType="CitasModel.Store.DetalleFechaBloques" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ClienteEstadoCliente" Association="CitasModel.Store.ClienteEstadoCliente">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="EstadoCliente" EntitySet="EstadoClientes" />
+    </AssociationSet>
+    <AssociationSet Name="CitaEstadoCita" Association="CitasModel.Store.CitaEstadoCita">
+      <End Role="Cita" EntitySet="Citas" />
+      <End Role="EstadoCita" EntitySet="EstadoCitas" />
+    </AssociationSet>
+    <AssociationSet Name="ServicioTipoServicio" Association="CitasModel.Store.ServicioTipoServicio">
+      <End Role="Servicio" EntitySet="Servicios" />
+      <End Role="TipoServicio" EntitySet="TipoServicios" />
+    </AssociationSet>
+    <AssociationSet Name="CitaServicio" Association="CitasModel.Store.CitaServicio">
+      <End Role="Cita" EntitySet="Citas" />
+      <End Role="Servicio" EntitySet="Servicios" />
+    </AssociationSet>
+    <AssociationSet Name="CitaCliente" Association="CitasModel.Store.CitaCliente">
+      <End Role="Cita" EntitySet="Citas" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="HoraDetalleFechaBloque" Association="CitasModel.Store.HoraDetalleFechaBloque">
+      <End Role="Hora" EntitySet="Horas" />
+      <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+    </AssociationSet>
+    <AssociationSet Name="FechaDetalleFechaBloque" Association="CitasModel.Store.FechaDetalleFechaBloque">
+      <End Role="Fecha" EntitySet="Fechas" />
+      <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+    </AssociationSet>
+    <AssociationSet Name="DetalleFechaBloqueEstadoHorario" Association="CitasModel.Store.DetalleFechaBloqueEstadoHorario">
+      <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+      <End Role="EstadoHorario" EntitySet="EstadoHorarios" />
+    </AssociationSet>
+    <AssociationSet Name="CitaDetalleFechaBloque" Association="CitasModel.Store.CitaDetalleFechaBloque">
+      <End Role="Cita" EntitySet="Citas" />
+      <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="correo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="edad" Type="smallint" Nullable="false" />
+    <Property Name="EstadoCliente_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Citas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="numero_deposito" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EstadoCita_Id" Type="int" Nullable="false" />
+    <Property Name="Servicio_Id" Type="int" Nullable="false" />
+    <Property Name="Cliente_Id" Type="int" Nullable="false" />
+    <Property Name="DetalleFechaBloque_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoServicios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Servicios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TipoServicio_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadoCitas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadoClientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fechas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="año" Type="smallint" Nullable="false" />
+    <Property Name="mes" Type="smallint" Nullable="false" />
+    <Property Name="dia" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadoHorarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Horas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bloque" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleFechaBloques">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoraId" Type="int" Nullable="false" />
+    <Property Name="FechaId" Type="int" Nullable="false" />
+    <Property Name="EstadoHorario_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ClienteEstadoCliente">
+    <End Role="Cliente" Type="CitasModel.Store.Clientes" Multiplicity="*" />
+    <End Role="EstadoCliente" Type="CitasModel.Store.EstadoClientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoCliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="EstadoCliente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CitaEstadoCita">
+    <End Role="Cita" Type="CitasModel.Store.Citas" Multiplicity="*" />
+    <End Role="EstadoCita" Type="CitasModel.Store.EstadoCitas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoCita">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="EstadoCita_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ServicioTipoServicio">
+    <End Role="Servicio" Type="CitasModel.Store.Servicios" Multiplicity="*" />
+    <End Role="TipoServicio" Type="CitasModel.Store.TipoServicios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TipoServicio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Servicio">
+        <PropertyRef Name="TipoServicio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CitaServicio">
+    <End Role="Cita" Type="CitasModel.Store.Citas" Multiplicity="*" />
+    <End Role="Servicio" Type="CitasModel.Store.Servicios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Servicio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="Servicio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CitaCliente">
+    <End Role="Cita" Type="CitasModel.Store.Citas" Multiplicity="*" />
+    <End Role="Cliente" Type="CitasModel.Store.Clientes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="Cliente_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HoraDetalleFechaBloque">
+    <End Role="Hora" Type="CitasModel.Store.Horas" Multiplicity="1" />
+    <End Role="DetalleFechaBloque" Type="CitasModel.Store.DetalleFechaBloques" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hora">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetalleFechaBloque">
+        <PropertyRef Name="HoraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FechaDetalleFechaBloque">
+    <End Role="Fecha" Type="CitasModel.Store.Fechas" Multiplicity="1" />
+    <End Role="DetalleFechaBloque" Type="CitasModel.Store.DetalleFechaBloques" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fecha">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetalleFechaBloque">
+        <PropertyRef Name="FechaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DetalleFechaBloqueEstadoHorario">
+    <End Role="DetalleFechaBloque" Type="CitasModel.Store.DetalleFechaBloques" Multiplicity="*" />
+    <End Role="EstadoHorario" Type="CitasModel.Store.EstadoHorarios" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoHorario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetalleFechaBloque">
+        <PropertyRef Name="EstadoHorario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CitaDetalleFechaBloque">
+    <End Role="Cita" Type="CitasModel.Store.Citas" Multiplicity="*" />
+    <End Role="DetalleFechaBloque" Type="CitasModel.Store.DetalleFechaBloques" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="DetalleFechaBloque">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="DetalleFechaBloque_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CitasModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CitasModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="CitasModel.Cliente" />
+          <EntitySet Name="Citas" EntityType="CitasModel.Cita" />
+          <EntitySet Name="TipoServicios" EntityType="CitasModel.TipoServicio" />
+          <EntitySet Name="Servicios" EntityType="CitasModel.Servicio" />
+          <EntitySet Name="EstadoCitas" EntityType="CitasModel.EstadoCita" />
+          <EntitySet Name="EstadoClientes" EntityType="CitasModel.EstadoCliente" />
+          <EntitySet Name="Fechas" EntityType="CitasModel.Fecha" />
+          <AssociationSet Name="ClienteEstadoCliente" Association="CitasModel.ClienteEstadoCliente">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="EstadoCliente" EntitySet="EstadoClientes" />
+          </AssociationSet>
+          <AssociationSet Name="CitaEstadoCita" Association="CitasModel.CitaEstadoCita">
+            <End Role="Cita" EntitySet="Citas" />
+            <End Role="EstadoCita" EntitySet="EstadoCitas" />
+          </AssociationSet>
+          <AssociationSet Name="ServicioTipoServicio" Association="CitasModel.ServicioTipoServicio">
+            <End Role="Servicio" EntitySet="Servicios" />
+            <End Role="TipoServicio" EntitySet="TipoServicios" />
+          </AssociationSet>
+          <AssociationSet Name="CitaServicio" Association="CitasModel.CitaServicio">
+            <End Role="Cita" EntitySet="Citas" />
+            <End Role="Servicio" EntitySet="Servicios" />
+          </AssociationSet>
+          <EntitySet Name="EstadoHorarios" EntityType="CitasModel.EstadoHorario" />
+          <AssociationSet Name="CitaCliente" Association="CitasModel.CitaCliente">
+            <End Role="Cita" EntitySet="Citas" />
+            <End Role="Cliente" EntitySet="Clientes" />
+          </AssociationSet>
+          <EntitySet Name="Horas" EntityType="CitasModel.Hora" />
+          <EntitySet Name="DetalleFechaBloques" EntityType="CitasModel.DetalleFechaBloque" />
+          <AssociationSet Name="HoraDetalleFechaBloque" Association="CitasModel.HoraDetalleFechaBloque">
+            <End Role="Hora" EntitySet="Horas" />
+            <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+          </AssociationSet>
+          <AssociationSet Name="FechaDetalleFechaBloque" Association="CitasModel.FechaDetalleFechaBloque">
+            <End Role="Fecha" EntitySet="Fechas" />
+            <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+          </AssociationSet>
+          <AssociationSet Name="DetalleFechaBloqueEstadoHorario" Association="CitasModel.DetalleFechaBloqueEstadoHorario">
+            <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+            <End Role="EstadoHorario" EntitySet="EstadoHorarios" />
+          </AssociationSet>
+          <AssociationSet Name="CitaDetalleFechaBloque" Association="CitasModel.CitaDetalleFechaBloque">
+            <End Role="Cita" EntitySet="Citas" />
+            <End Role="DetalleFechaBloque" EntitySet="DetalleFechaBloques" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <Property Name="apellido" Type="String" Nullable="false" />
+          <Property Name="correo" Type="String" Nullable="false" />
+          <Property Name="telefono" Type="String" Nullable="false" />
+          <Property Name="edad" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="EstadoCliente" Relationship="CitasModel.ClienteEstadoCliente" FromRole="Cliente" ToRole="EstadoCliente" />
+          <NavigationProperty Name="Cita" Relationship="CitasModel.CitaCliente" FromRole="Cliente" ToRole="Cita" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <Property Name="numero_deposito" Type="String" Nullable="false" />
+          <NavigationProperty Name="EstadoCita" Relationship="CitasModel.CitaEstadoCita" FromRole="Cita" ToRole="EstadoCita" />
+          <NavigationProperty Name="Servicio" Relationship="CitasModel.CitaServicio" FromRole="Cita" ToRole="Servicio" />
+          <NavigationProperty Name="Cliente" Relationship="CitasModel.CitaCliente" FromRole="Cita" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleFechaBloque" Relationship="CitasModel.CitaDetalleFechaBloque" FromRole="Cita" ToRole="DetalleFechaBloque" />
+        </EntityType>
+        <EntityType Name="TipoServicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Servicio" Relationship="CitasModel.ServicioTipoServicio" FromRole="TipoServicio" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="TipoServicio" Relationship="CitasModel.ServicioTipoServicio" FromRole="Servicio" ToRole="TipoServicio" />
+          <NavigationProperty Name="Cita" Relationship="CitasModel.CitaServicio" FromRole="Servicio" ToRole="Cita" />
+        </EntityType>
+        <EntityType Name="EstadoCita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Cita" Relationship="CitasModel.CitaEstadoCita" FromRole="EstadoCita" ToRole="Cita" />
+        </EntityType>
+        <EntityType Name="EstadoCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="CitasModel.ClienteEstadoCliente" FromRole="EstadoCliente" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Fecha">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="año" Type="Int16" Nullable="false" />
+          <Property Name="mes" Type="Int16" Nullable="false" />
+          <Property Name="dia" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="DetalleFechaBloque" Relationship="CitasModel.FechaDetalleFechaBloque" FromRole="Fecha" ToRole="DetalleFechaBloque" />
+        </EntityType>
+        <Association Name="ClienteEstadoCliente">
+          <End Type="CitasModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <End Type="CitasModel.EstadoCliente" Role="EstadoCliente" Multiplicity="1" />
+        </Association>
+        <Association Name="CitaEstadoCita">
+          <End Type="CitasModel.Cita" Role="Cita" Multiplicity="*" />
+          <End Type="CitasModel.EstadoCita" Role="EstadoCita" Multiplicity="1" />
+        </Association>
+        <Association Name="ServicioTipoServicio">
+          <End Type="CitasModel.Servicio" Role="Servicio" Multiplicity="*" />
+          <End Type="CitasModel.TipoServicio" Role="TipoServicio" Multiplicity="1" />
+        </Association>
+        <Association Name="CitaServicio">
+          <End Type="CitasModel.Cita" Role="Cita" Multiplicity="*" />
+          <End Type="CitasModel.Servicio" Role="Servicio" Multiplicity="1" />
+        </Association>
+        <EntityType Name="EstadoHorario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" />
+          <NavigationProperty Name="DetalleFechaBloque" Relationship="CitasModel.DetalleFechaBloqueEstadoHorario" FromRole="EstadoHorario" ToRole="DetalleFechaBloque" />
+        </EntityType>
+        <Association Name="CitaCliente">
+          <End Type="CitasModel.Cita" Role="Cita" Multiplicity="*" />
+          <End Type="CitasModel.Cliente" Role="Cliente" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Hora">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bloque" Type="String" Nullable="false" />
+          <NavigationProperty Name="DetalleFechaBloque" Relationship="CitasModel.HoraDetalleFechaBloque" FromRole="Hora" ToRole="DetalleFechaBloque" />
+        </EntityType>
+        <EntityType Name="DetalleFechaBloque">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <NavigationProperty Name="Hora" Relationship="CitasModel.HoraDetalleFechaBloque" FromRole="DetalleFechaBloque" ToRole="Hora" />
+          <Property Name="HoraId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fecha" Relationship="CitasModel.FechaDetalleFechaBloque" FromRole="DetalleFechaBloque" ToRole="Fecha" />
+          <Property Name="FechaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoHorario" Relationship="CitasModel.DetalleFechaBloqueEstadoHorario" FromRole="DetalleFechaBloque" ToRole="EstadoHorario" />
+          <NavigationProperty Name="Cita" Relationship="CitasModel.CitaDetalleFechaBloque" FromRole="DetalleFechaBloque" ToRole="Cita" />
+        </EntityType>
+        <Association Name="HoraDetalleFechaBloque">
+          <End Type="CitasModel.Hora" Role="Hora" Multiplicity="1" />
+          <End Type="CitasModel.DetalleFechaBloque" Role="DetalleFechaBloque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hora">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleFechaBloque">
+              <PropertyRef Name="HoraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FechaDetalleFechaBloque">
+          <End Type="CitasModel.Fecha" Role="Fecha" Multiplicity="1" />
+          <End Type="CitasModel.DetalleFechaBloque" Role="DetalleFechaBloque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fecha">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleFechaBloque">
+              <PropertyRef Name="FechaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DetalleFechaBloqueEstadoHorario">
+          <End Type="CitasModel.DetalleFechaBloque" Role="DetalleFechaBloque" Multiplicity="*" />
+          <End Type="CitasModel.EstadoHorario" Role="EstadoHorario" Multiplicity="1" />
+        </Association>
+        <Association Name="CitaDetalleFechaBloque">
+          <End Type="CitasModel.Cita" Role="Cita" Multiplicity="0..1" />
+          <End Type="CitasModel.DetalleFechaBloque" Role="DetalleFechaBloque" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CitasModelStoreContainer" CdmEntityContainer="CitasModelContainer">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Cliente)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Citas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Cita)">
+        <MappingFragment StoreEntitySet="Citas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="numero_deposito" ColumnName="numero_deposito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoServicios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.TipoServicio)">
+        <MappingFragment StoreEntitySet="TipoServicios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servicios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Servicio)">
+        <MappingFragment StoreEntitySet="Servicios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCitas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoCita)">
+        <MappingFragment StoreEntitySet="EstadoCitas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoClientes">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoCliente)">
+        <MappingFragment StoreEntitySet="EstadoClientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fechas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Fecha)">
+        <MappingFragment StoreEntitySet="Fechas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="año" ColumnName="año" />
+          <ScalarProperty Name="mes" ColumnName="mes" />
+          <ScalarProperty Name="dia" ColumnName="dia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoHorarios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoHorario)">
+        <MappingFragment StoreEntitySet="EstadoHorarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Hora)">
+        <MappingFragment StoreEntitySet="Horas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="bloque" ColumnName="bloque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleFechaBloques">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.DetalleFechaBloque)">
+        <MappingFragment StoreEntitySet="DetalleFechaBloques">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="HoraId" ColumnName="HoraId" />
+          <ScalarProperty Name="FechaId" ColumnName="FechaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClienteEstadoCliente" TypeName="CitasModel.ClienteEstadoCliente" StoreEntitySet="Clientes">
+      <EndProperty Name="EstadoCliente">
+        <ScalarProperty Name="Id" ColumnName="EstadoCliente_Id" />
+      </EndProperty>
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaEstadoCita" TypeName="CitasModel.CitaEstadoCita" StoreEntitySet="Citas">
+      <EndProperty Name="EstadoCita">
+        <ScalarProperty Name="Id" ColumnName="EstadoCita_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ServicioTipoServicio" TypeName="CitasModel.ServicioTipoServicio" StoreEntitySet="Servicios">
+      <EndProperty Name="TipoServicio">
+        <ScalarProperty Name="Id" ColumnName="TipoServicio_Id" />
+      </EndProperty>
+      <EndProperty Name="Servicio">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaServicio" TypeName="CitasModel.CitaServicio" StoreEntitySet="Citas">
+      <EndProperty Name="Servicio">
+        <ScalarProperty Name="Id" ColumnName="Servicio_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaCliente" TypeName="CitasModel.CitaCliente" StoreEntitySet="Citas">
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="Id" ColumnName="Cliente_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DetalleFechaBloqueEstadoHorario" TypeName="CitasModel.DetalleFechaBloqueEstadoHorario" StoreEntitySet="DetalleFechaBloques">
+      <EndProperty Name="EstadoHorario">
+        <ScalarProperty Name="Id" ColumnName="EstadoHorario_Id" />
+      </EndProperty>
+      <EndProperty Name="DetalleFechaBloque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaDetalleFechaBloque" TypeName="CitasModel.CitaDetalleFechaBloque" StoreEntitySet="Citas">
+      <EndProperty Name="DetalleFechaBloque">
+        <ScalarProperty Name="Id" ColumnName="DetalleFechaBloque_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

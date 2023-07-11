@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CitasModelStoreContainer" CdmEntityContainer="CitasModelContainer">
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Cliente)">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Citas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Cita)">
+        <MappingFragment StoreEntitySet="Citas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="numero_deposito" ColumnName="numero_deposito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoServicios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.TipoServicio)">
+        <MappingFragment StoreEntitySet="TipoServicios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servicios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Servicio)">
+        <MappingFragment StoreEntitySet="Servicios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCitas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoCita)">
+        <MappingFragment StoreEntitySet="EstadoCitas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoClientes">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoCliente)">
+        <MappingFragment StoreEntitySet="EstadoClientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fechas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Fecha)">
+        <MappingFragment StoreEntitySet="Fechas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="año" ColumnName="año" />
+          <ScalarProperty Name="mes" ColumnName="mes" />
+          <ScalarProperty Name="dia" ColumnName="dia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoHorarios">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.EstadoHorario)">
+        <MappingFragment StoreEntitySet="EstadoHorarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horas">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.Hora)">
+        <MappingFragment StoreEntitySet="Horas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="bloque" ColumnName="bloque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleFechaBloques">
+      <EntityTypeMapping TypeName="IsTypeOf(CitasModel.DetalleFechaBloque)">
+        <MappingFragment StoreEntitySet="DetalleFechaBloques">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="HoraId" ColumnName="HoraId" />
+          <ScalarProperty Name="FechaId" ColumnName="FechaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClienteEstadoCliente" TypeName="CitasModel.ClienteEstadoCliente" StoreEntitySet="Clientes">
+      <EndProperty Name="EstadoCliente">
+        <ScalarProperty Name="Id" ColumnName="EstadoCliente_Id" />
+      </EndProperty>
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaEstadoCita" TypeName="CitasModel.CitaEstadoCita" StoreEntitySet="Citas">
+      <EndProperty Name="EstadoCita">
+        <ScalarProperty Name="Id" ColumnName="EstadoCita_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ServicioTipoServicio" TypeName="CitasModel.ServicioTipoServicio" StoreEntitySet="Servicios">
+      <EndProperty Name="TipoServicio">
+        <ScalarProperty Name="Id" ColumnName="TipoServicio_Id" />
+      </EndProperty>
+      <EndProperty Name="Servicio">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaServicio" TypeName="CitasModel.CitaServicio" StoreEntitySet="Citas">
+      <EndProperty Name="Servicio">
+        <ScalarProperty Name="Id" ColumnName="Servicio_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaCliente" TypeName="CitasModel.CitaCliente" StoreEntitySet="Citas">
+      <EndProperty Name="Cliente">
+        <ScalarProperty Name="Id" ColumnName="Cliente_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DetalleFechaBloqueEstadoHorario" TypeName="CitasModel.DetalleFechaBloqueEstadoHorario" StoreEntitySet="DetalleFechaBloques">
+      <EndProperty Name="EstadoHorario">
+        <ScalarProperty Name="Id" ColumnName="EstadoHorario_Id" />
+      </EndProperty>
+      <EndProperty Name="DetalleFechaBloque">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CitaDetalleFechaBloque" TypeName="CitasModel.CitaDetalleFechaBloque" StoreEntitySet="Citas">
+      <EndProperty Name="DetalleFechaBloque">
+        <ScalarProperty Name="Id" ColumnName="DetalleFechaBloque_Id" />
+      </EndProperty>
+      <EndProperty Name="Cita">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
